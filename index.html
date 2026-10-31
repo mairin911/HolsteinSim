@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#173d32"><meta name="description" content="HolsteinSim: simulador académico de una vaca Holstein en lactancia y su balance digestivo e hídrico.">
+<title>HolsteinSim | Simulación bovina</title>
+<style>
+:root{--ink:#172b25;--muted:#687a72;--green:#1e5946;--green2:#2f8061;--mint:#eaf4ed;--cream:#f7f8f3;--line:#e3e9e2;--gold:#d7a84b;--white:#fff;--shadow:0 12px 34px #193b2a12}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}button,input{font:inherit}.app{min-height:100vh;display:grid;grid-template-columns:248px 1fr}.sidebar{background:#173d32;color:#eaf4ed;padding:26px 18px;display:flex;flex-direction:column;gap:28px}.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:19px;letter-spacing:-.5px}.brandmark{width:38px;height:38px;border-radius:12px;background:#d9eddf;color:#1e5946;display:grid;place-items:center;font-size:21px}.brand small{display:block;color:#a9c5b5;font-size:10px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase}.navlabel{font-size:10px;letter-spacing:1.6px;color:#91b1a0;font-weight:800;padding:0 12px}.nav{display:grid;gap:6px}.nav button{border:0;background:transparent;color:#c8dacf;text-align:left;padding:11px 12px;border-radius:10px;cursor:pointer;display:flex;gap:12px;align-items:center}.nav button.active,.nav button:hover{background:#ffffff17;color:white}.nav .ico{width:20px;text-align:center}.sidefoot{margin-top:auto;border-top:1px solid #ffffff20;padding:17px 8px 0;color:#a9c5b5;font-size:11px}.main{min-width:0;padding:30px clamp(18px,4vw,54px) 60px;max-width:1600px;width:100%;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:26px}.eyebrow{color:var(--green2);font-size:11px;font-weight:800;letter-spacing:1.7px;text-transform:uppercase}.top h1{font-size:clamp(25px,3vw,34px);letter-spacing:-1.2px;margin:4px 0}.sub{color:var(--muted);margin:0}.status{background:#e8f3e9;color:#286345;padding:8px 12px;border-radius:30px;font-size:12px;font-weight:700;white-space:nowrap}.status:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#3e9b66;margin-right:7px}.view{display:none}.view.active{display:block}.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}.card{background:white;border:1px solid var(--line);border-radius:17px;padding:21px;box-shadow:var(--shadow);min-width:0}.cardhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px}.card h2{font-size:16px;margin:0;letter-spacing:-.3px}.muted{color:var(--muted);font-size:12px}.cowstage{background:linear-gradient(145deg,#f2f7f0,#e7f0e6);border-radius:14px;min-height:300px;display:grid;place-items:center;overflow:hidden;position:relative}.cowstage svg{width:min(100%,570px);height:auto;max-height:310px}.tag{position:absolute;left:14px;top:14px;background:#fff;padding:7px 10px;border-radius:9px;font-size:11px;color:#476355;font-weight:700}.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.metric{padding:15px;border:1px solid var(--line);border-radius:13px}.metric .name{font-size:11px;color:var(--muted)}.metric strong{display:block;font-size:25px;letter-spacing:-1px;margin:5px 0 0}.metric span{font-size:11px;color:var(--muted)}.metric.wide{grid-column:span 2}.metric.wide strong{font-size:20px}.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 22px}.control{display:grid;gap:7px}.control label{font-size:12px;font-weight:700;display:flex;justify-content:space-between;gap:8px}.control output{color:var(--green2);font-variant-numeric:tabular-nums}.control input{width:100%;accent-color:var(--green2)}.hint{font-size:11px;color:var(--muted)}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}.btn{border:0;border-radius:10px;padding:11px 17px;font-weight:750;cursor:pointer}.primary{background:var(--green);color:white}.primary:hover{background:#164532}.secondary{background:var(--mint);color:var(--green)}.sectiongap{margin-top:18px}.barrow{display:grid;grid-template-columns:120px 1fr 55px;gap:12px;align-items:center;margin:15px 0;font-size:12px}.bar{height:9px;background:#edf1ec;border-radius:20px;overflow:hidden}.bar i{display:block;height:100%;background:var(--green2);border-radius:20px}.barrow b{text-align:right;font-variant-numeric:tabular-nums}.note{background:#f8f5e9;border:1px solid #eee4c6;color:#66562d;padding:13px 15px;border-radius:12px;font-size:12px;margin-top:16px}.digest{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.digest .metric strong{font-size:21px}.table{width:100%;border-collapse:collapse;font-size:13px}.table td,.table th{padding:12px 9px;border-bottom:1px solid var(--line);text-align:left}.table th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.8px}.pill{font-size:10px;background:#edf5ed;color:#2c6549;padding:4px 8px;border-radius:20px;font-weight:800}.footer{color:#849188;font-size:11px;text-align:center;margin-top:30px}.hidden{display:none!important}
+@media(max-width:850px){.app{grid-template-columns:1fr}.sidebar{padding:13px 15px;gap:12px}.brand small,.navlabel,.sidefoot{display:none}.nav{display:flex;overflow:auto}.nav button{white-space:nowrap;padding:9px 12px}.main{padding:22px 16px 45px}.grid{grid-template-columns:1fr}}@media(max-width:520px){.top{align-items:flex-start;flex-direction:column}.controls{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}.digest{grid-template-columns:1fr}.barrow{grid-template-columns:95px 1fr 45px}.cowstage{min-height:230px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+<div class="brand"><div class="brandmark">🐄</div><div>HolsteinSim<small>Laboratorio bovino</small></div></div>
+<div><div class="navlabel">MODELO</div><nav class="nav">
+<button class="active" data-view="overview"><span class="ico">▦</span> Resumen</button>
+<button data-view="simulation"><span class="ico">◉</span> Simulación</button>
+<button data-view="digestive"><span class="ico">♧</span> Sistema digestivo</button>
+<button data-view="results"><span class="ico">▤</span> Resultados</button>
+</nav></div>
+<div class="sidefoot">MODELO ACADÉMICO · VERSIÓN 1.0<br>Simulación individual Holstein</div>
+</aside>
+<main class="main">
+<header class="top"><div><div class="eyebrow">SIMULACIÓN DE GANADO LECHERO</div><h1 id="pageTitle">Panel de la vaca</h1><p class="sub" id="pageSub">Monitoreo exploratorio de lactancia, consumo y balance digestivo.</p></div><div class="status">Modelo listo</div></header>
+
+<section class="view active" id="overview">
+<div class="grid">
+<article class="card"><div class="cardhead"><h2>Individuo simulado</h2><span class="pill">HOLSTEIN · LACTANCIA</span></div>
+<div class="cowstage"><span class="tag">Vaca #HS-001</span>
+<svg viewBox="0 0 600 310" role="img" aria-label="Ilustración vectorial de una vaca Holstein">
+<ellipse cx="300" cy="250" rx="210" ry="20" fill="#cdddcf" opacity=".55"/>
+<path d="M145 112 Q110 85 95 116 L110 145 Q133 147 151 133" fill="#fff" stroke="#26352e" stroke-width="5"/>
+<path d="M430 111 Q472 82 487 115 L469 145 Q448 147 428 132" fill="#fff" stroke="#26352e" stroke-width="5"/>
+<path d="M143 115 Q150 74 202 69 L400 72 Q453 82 460 126 L445 210 Q422 234 385 231 L179 230 Q142 212 137 178Z" fill="#fff" stroke="#26352e" stroke-width="6"/>
+<path d="M175 83 Q210 65 237 90 L228 133 Q193 150 159 126Z" fill="#26352e"/>
+<path d="M308 74 Q349 61 369 88 L354 131 Q321 145 291 119Z" fill="#26352e"/>
+<path d="M399 157 Q431 139 454 161 L440 205 Q412 223 389 201Z" fill="#26352e"/>
+<path d="M135 123 Q104 118 83 140 Q68 163 86 185 Q103 199 137 180Z" fill="#fff" stroke="#26352e" stroke-width="6"/>
+<ellipse cx="93" cy="165" rx="28" ry="19" fill="#efb8ad" stroke="#26352e" stroke-width="5"/>
+<circle cx="101" cy="157" r="3.5" fill="#26352e"/><circle cx="82" cy="157" r="3.5" fill="#26352e"/>
+<path d="M143 205 L149 272 L176 272 L185 222 M373 222 L381 272 L407 272 L415 213 M425 209 L433 270 L458 270 L454 190" fill="#fff" stroke="#26352e" stroke-width="6" stroke-linejoin="round"/>
+<path d="M148 270 L177 270 M380 270 L408 270 M432 268 L459 268" stroke="#26352e" stroke-width="7" stroke-linecap="round"/>
+<path d="M445 117 Q501 92 514 127 Q523 146 504 155" fill="none" stroke="#26352e" stroke-width="6" stroke-linecap="round"/>
+<path d="M504 155 q12 2 17 -9" fill="none" stroke="#26352e" stroke-width="5" stroke-linecap="round"/>
+<path d="M244 218 Q270 201 301 217 L315 241 Q285 256 251 241Z" fill="#efb8ad" stroke="#26352e" stroke-width="4"/>
+<path d="M263 242 L260 252 M281 245 L280 255 M300 243 L302 253" stroke="#bd8179" stroke-width="3" stroke-linecap="round"/>
+<path d="M133 125 Q122 112 111 123" fill="none" stroke="#26352e" stroke-width="4"/>
+</svg></div>
+<div class="muted" style="margin-top:12px">Representación esquemática. Los parámetros se pueden modificar en la sección Simulación.</div></article>
+<article class="card"><div class="cardhead"><h2>Indicadores principales</h2><span class="muted">Estimaciones diarias</span></div><div class="metrics">
+<div class="metric"><div class="name">Producción de leche</div><strong id="milkVal">30.0</strong><span>kg / día</span></div>
+<div class="metric"><div class="name">Consumo de MS</div><strong id="dmiVal">20.0</strong><span>kg / día</span></div>
+<div class="metric"><div class="name">Agua bebida</div><strong id="waterVal">80</strong><span>L / día</span></div>
+<div class="metric"><div class="name">Humedad fecal</div><strong id="moistVal">—</strong><span>% estimado</span></div>
+<div class="metric wide"><div class="name">Materia seca fecal calculada</div><strong id="fecalVal">— kg/día</strong><span>Estimación simplificada según digestibilidad aparente</span></div>
+</div></article></div>
+<div class="grid sectiongap">
+<article class="card"><div class="cardhead"><h2>Balance de entradas</h2><span class="muted">Agua estimada (L/día)</span></div>
+<div class="barrow"><span>Agua bebida</span><div class="bar"><i id="drinkBar" style="width:70%"></i></div><b id="drinkText">80</b></div>
+<div class="barrow"><span>Agua del alimento</span><div class="bar"><i id="feedBar" style="width:30%"></i></div><b id="feedText">24</b></div>
+<div class="note">El balance hídrico completo requiere estimar también agua en heces, orina, leche, evaporación y agua metabólica. Esta versión muestra solo una aproximación parcial.</div></article>
+<article class="card"><div class="cardhead"><h2>Estado del experimento</h2></div><p style="margin:0 0 8px">Escenario base de una vaca Holstein en lactancia.</p><div class="muted">Ajusta las variables de entrada y ejecuta la simulación para observar cómo cambian los indicadores digestivos.</div><div class="actions"><button class="btn primary" onclick="go('simulation')">Configurar simulación →</button></div></article>
+</div>
+</section>
+
+<section class="view" id="simulation">
+<article class="card"><div class="cardhead"><h2>Parámetros de entrada</h2><span class="pill">EDITABLE</span></div><p class="muted">Modifica las condiciones de la vaca y de la dieta. Los resultados se recalculan al ejecutar.</p>
+<div class="controls">
+<div class="control"><label for="weight">Peso vivo <output id="weightOut">600 kg</output></label><input id="weight" type="range" min="400" max="800" step="10" value="600"><span class="hint">Rango de exploración: 400–800 kg</span></div>
+<div class="control"><label for="milk">Producción de leche <output id="milkOut">30 kg/día</output></label><input id="milk" type="range" min="5" max="50" step="1" value="30"></div>
+<div class="control"><label for="dmi">Consumo de materia seca <output id="dmiOut">20 kg/día</output></label><input id="dmi" type="range" min="8" max="30" step=".5" value="20"></div>
+<div class="control"><label for="water">Agua bebida <output id="waterOut">80 L/día</output></label><input id="water" type="range" min="20" max="160" step="2" value="80"></div>
+<div class="control"><label for="dm">Materia seca de la dieta <output id="dmOut">45 %</output></label><input id="dm" type="range" min="20" max="90" step="1" value="45"></div>
+<div class="control"><label for="digest">Digestibilidad aparente <output id="digestOut">65 %</output></label><input id="digest" type="range" min="40" max="85" step="1" value="65"></div>
+</div>
+<div class="actions"><button class="btn primary" id="runBtn">▶ Ejecutar simulación</button><button class="btn secondary" id="resetBtn">Restablecer valores</button></div>
+<div class="note">Los valores iniciales son supuestos didácticos. El modelo no está calibrado ni validado para tomar decisiones clínicas, nutricionales o productivas reales.</div>
+</article>
+<div class="grid sectiongap"><article class="card"><h2>Vista previa de variables</h2><div class="metrics" style="margin-top:14px">
+<div class="metric"><div class="name">Peso vivo</div><strong id="pvWeight">600</strong><span>kg</span></div><div class="metric"><div class="name">Leche</div><strong id="pvMilk">30</strong><span>kg/día</span></div>
+</div></article><article class="card"><h2>Descripción del escenario</h2><p class="muted" id="scenarioText">Vaca adulta de 600 kg, con producción de 30 kg de leche y dieta de 45 % de materia seca.</p></article></div>
+</section>
+
+<section class="view" id="digestive">
+<div class="grid"><article class="card"><div class="cardhead"><h2>Estimación de salida fecal</h2><span class="pill">BALANCE SIMPLIFICADO</span></div><div class="metrics">
+<div class="metric"><div class="name">MS fecal</div><strong id="digFecal">7.00</strong><span>kg/día</span></div>
+<div class="metric"><div class="name">Agua del alimento</div><strong id="digFeedWater">24.4</strong><span>L/día aprox.</span></div>
+<div class="metric"><div class="name">Agua fecal supuesta</div><strong id="digWaterFecal">—</strong><span>L/día · escenario</span></div>
+<div class="metric"><div class="name">Humedad fecal</div><strong id="digMoist">—</strong><span>%</span></div>
+</div><div class="note">Para estimar humedad fecal, esta versión usa una fracción didáctica del agua ingerida como agua fecal. No representa una medición fisiológica ni un balance de agua validado.</div></article>
+<article class="card"><h2>Flujo conceptual</h2><div style="display:grid;gap:9px;margin-top:15px">
+<div class="metric"><b>1. Ingestión</b><div class="muted">Materia seca + agua del alimento + agua bebida</div></div><div style="text-align:center;color:#91a398">↓</div>
+<div class="metric"><b>2. Digestión y absorción</b><div class="muted">Fracción digestible estimada mediante el parámetro de digestibilidad</div></div><div style="text-align:center;color:#91a398">↓</div>
+<div class="metric"><b>3. Excreción fecal</b><div class="muted">Materia seca no digerida + agua fecal supuesta</div></div>
+</div></article></div></section>
+
+<section class="view" id="results">
+<article class="card"><div class="cardhead"><h2>Resultados del último escenario</h2><span class="muted" id="runStamp">Escenario base</span></div>
+<table class="table"><thead><tr><th>Indicador</th><th>Resultado</th><th>Unidad</th></tr></thead><tbody>
+<tr><td>Peso vivo</td><td id="rWeight">600</td><td>kg</td></tr><tr><td>Producción de leche</td><td id="rMilk">30.0</td><td>kg/día</td></tr><tr><td>Consumo de materia seca</td><td id="rDmi">20.0</td><td>kg/día</td></tr><tr><td>Agua bebida</td><td id="rWater">80</td><td>L/día</td></tr><tr><td>Agua del alimento</td><td id="rFeedWater">24.4</td><td>L/día aprox.</td></tr><tr><td>Materia seca fecal</td><td id="rFecal">7.00</td><td>kg/día</td></tr><tr><td>Agua fecal supuesta</td><td id="rFecalWater">—</td><td>L/día</td></tr><tr><td>Humedad fecal estimada</td><td id="rMoist">—</td><td>%</td></tr>
+</tbody></table><div class="note">La humedad fecal depende de muchos factores adicionales: composición de la dieta, fibra, fermentación ruminal, absorción intestinal, estado sanitario y condiciones ambientales. No usar estos resultados como diagnóstico.</div>
+</article></section>
+<div class="footer">HolsteinSim · Herramienta académica de simulación · No sustituye asesoría veterinaria.</div>
+</main></div>
+<script>
+const ids=['weight','milk','dmi','water','dm','digest'];
+const $=id=>document.getElementById(id);
+let last={};
+function inputs(){return Object.fromEntries(ids.map(id=>[id,Number($(id).value)]))}
+function calc(p){
+ const feedWater=p.dmi*((100-p.dm)/p.dm);
+ const fecalDM=p.dmi*(1-p.digest/100);
+ // Coeficiente ilustrativo para hacer visible el efecto hídrico; no es un parámetro fisiológico validado.
+ const fecalWater=(p.water+feedWater)*0.18;
+ const moisture=fecalWater/(fecalWater+fecalDM)*100;
+ return {...p,feedWater,fecalDM,fecalWater,moisture};
+}
+function fmt(n,d=1){return Number(n).toFixed(d)}
+function render(){
+ const p=inputs();
+ $('weightOut').textContent=p.weight+' kg';$('milkOut').textContent=p.milk+' kg/día';$('dmiOut').textContent=fmt(p.dmi,1)+' kg/día';$('waterOut').textContent=p.water+' L/día';$('dmOut').textContent=p.dm+' %';$('digestOut').textContent=p.digest+' %';
+ $('pvWeight').textContent=p.weight;$('pvMilk').textContent=p.milk;
+ $('scenarioText').textContent='Vaca de '+p.weight+' kg, '+p.milk+' kg de leche/día, consumo de '+fmt(p.dmi,1)+' kg MS y dieta con '+p.dm+' % de materia seca.';
+}
+function showResults(r){
+ const set=(id,v)=>$(id).textContent=v;
+ set('milkVal',fmt(r.milk));set('dmiVal',fmt(r.dmi));set('waterVal',r.water);set('moistVal',fmt(r.moisture,1));set('fecalVal',fmt(r.fecalDM,2)+' kg/día');
+ set('drinkText',r.water);set('feedText',fmt(r.feedWater,1));
+ const total=r.water+r.feedWater;set('drinkBar', '');$('drinkBar').style.width=(r.water/total*100)+'%';$('feedBar').style.width=(r.feedWater/total*100)+'%';
+ set('digFecal',fmt(r.fecalDM,2));set('digFeedWater',fmt(r.feedWater,1));set('digWaterFecal',fmt(r.fecalWater,1));set('digMoist',fmt(r.moisture,1)+'%');
+ set('rWeight',r.weight);set('rMilk',fmt(r.milk));set('rDmi',fmt(r.dmi,1));set('rWater',r.water);set('rFeedWater',fmt(r.feedWater,1));set('rFecal',fmt(r.fecalDM,2));set('rFecalWater',fmt(r.fecalWater,1));set('rMoist',fmt(r.moisture,1));
+}
+function run(){last=calc(inputs());showResults(last);$('runStamp').textContent='Última ejecución: '+new Date().toLocaleString('es-CO');}
+function go(view){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===view));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===view));const titles={overview:['Panel de la vaca','Monitoreo exploratorio de lactancia, consumo y balance digestivo.'],simulation:['Configurar simulación','Ajusta las variables de entrada del individuo.'],digestive:['Sistema digestivo','Representación simplificada de la transformación del alimento.'],results:['Resultados del modelo','Consulta las salidas calculadas para el escenario actual.']};$('pageTitle').textContent=titles[view][0];$('pageSub').textContent=titles[view][1];}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.view)));
+ids.forEach(id=>$(id).addEventListener('input',render));
+$('runBtn').addEventListener('click',run);
+$('resetBtn').addEventListener('click',()=>{[600,30,20,80,45,65].forEach((v,i)=>$(ids[i]).value=v);render();run()});
+render();run();
+</script>
+</body></html>
